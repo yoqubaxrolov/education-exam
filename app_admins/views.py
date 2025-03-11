@@ -7,7 +7,7 @@ from app_admins.serializers import  LoginSerializer, RegisterSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from app_common.permissions import IsSuperAdmin
+from app_common.permissions import IsAdmin, IsSuperAdmin
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -16,6 +16,7 @@ User = get_user_model()
 
 class RegisterAPIView(APIView):
     serializer_class = RegisterSerializer 
+    permission_classes = [IsAdmin or IsSuperAdmin]
 
     def post(self, request):
         serializer = self.serializer_class(data=request.data) 
@@ -64,8 +65,6 @@ class AdminManagementAPIView(APIView):
         admin.is_staff = True
         admin.save()
         return Response({"message": "Admin created successfully"}, status=status.HTTP_201_CREATED)
-    
-
     
 
 

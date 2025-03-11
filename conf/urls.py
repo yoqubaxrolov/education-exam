@@ -11,6 +11,7 @@ urlpatterns = [
     path('adminchala/', include('app_admins.urls')),
     path('students/', include('app_students.urls')),
     path('teachers/', include('app_teachers.urls')),
+    path('groups/', include('app_groups.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
